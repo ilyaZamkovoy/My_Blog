@@ -266,6 +266,8 @@ GEM
     rake-compiler (0.9.9)
       rake
     ref (1.0.5)
+    rename (1.0.2)
+      rails (>= 3.0.0)
     request_store (1.2.0)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
@@ -346,7 +348,7 @@ GEM
     spring (1.6.4)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sprockets (3.7.0)
+    sprockets (3.6.3)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-es6 (0.9.0)
@@ -440,6 +442,7 @@ DEPENDENCIES
   rails (= 4.2.7.1)
   rails-erd
   rails_stdout_logging
+  rename (~> 1.0, >= 1.0.2)
   responders
   rollbar
   rspec-its
@@ -457,6 +460,7 @@ DEPENDENCIES
   slim_lint
   spring
   spring-commands-rspec
+  sprockets (= 3.6.3)
   stackprof
   therubyracer
   uglifier (>= 2.7.2)

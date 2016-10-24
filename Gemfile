@@ -4,6 +4,8 @@ ruby "2.3.1"
 
 gem "rails", "4.2.7.1"
 gem "pg"
+gem 'rename', '~> 1.0', '>= 1.0.2'
+gem 'sprockets', '3.6.3'
 
 # assets
 gem "autoprefixer-rails"
