@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  
   before_action :authenticate_user!
 
   respond_to :html
@@ -13,13 +12,13 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = current_user.posts 
+    @posts = current_user.posts
   end
 
-  def allUsersPosts
+  def all_users_posts
     @posts = Post.all
-    @userPosts = current_user.posts
-    @allUsers = User.all
+    @user_posts = current_user.posts
+    @all_users = User.all
   end
 
   def update

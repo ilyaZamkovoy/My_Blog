@@ -9,15 +9,15 @@ table.table.table-striped
     tr
       td= post.title
       td= post.text
-      
+
       =link_to '/userPage' do
               i.fi-trash
-              | 
+              |
 
 
-      - @userPosts.each do |p|
+      - @user_posts.each do |p|
 
-        -if post == p 
+        -if post == p
           td.actions
             = link_to post, class: 'btn' do
               i.fi-eye
