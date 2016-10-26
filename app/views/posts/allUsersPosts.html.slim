@@ -10,15 +10,9 @@ table.table.table-striped
       td= post.title
       td= post.text
 
-      =link_to '/userPage' do
-              i.fi-trash
-              |
-
-
       - @user_posts.each do |p|
-
+        td.actions
         -if post == p
-          td.actions
             = link_to post, class: 'btn' do
               i.fi-eye
               |  Show
@@ -28,8 +22,13 @@ table.table.table-striped
             = link_to post, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } do
               i.fi-trash
               |  Delete
-
-
+        -else
+          - @all_users.each do |user|
+            - user.posts.each do |user_post|
+              -if post == user_post
+                =link_to 'user full name', '/userPage' do
+                  i.fi-trash
+                  | =user.full_name
 br
 = link_to new_post_path, class: 'btn btn-primary' do
   i.fi-plus
