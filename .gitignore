@@ -10,5 +10,5 @@ vendor/cache
 vendor/ruby
 .sass-cache
 ._*
-.env
+
 .pryrc
