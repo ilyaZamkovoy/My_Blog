@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  
+  before_action :authenticate_user!
+
   respond_to :html
 
   expose :post
@@ -13,15 +16,19 @@ class PostsController < ApplicationController
     @posts = current_user.posts 
   end
 
-  
+  def allUsersPosts
+    @posts = Post.all
+    @userPosts = current_user.posts
+    @allUsers = User.all
+  end
 
   def update
-    @post.update_attributes(post_params)
+    post.update_attributes(post_params)
     respond_with(post)
   end
 
   def destroy
-    @post.destroy
+    post.destroy
     respond_with(post)
   end
 
