@@ -2,20 +2,26 @@ class PostsController < ApplicationController
   respond_to :html
 
   expose :post
-  expose :posts, -> { Post.page(params[:page]) }
 
   def create
-    post.save
+    @post = current_user.posts.create(post_params)
+
     respond_with(post)
   end
 
+  def index
+    @posts = current_user.posts 
+  end
+
+  
+
   def update
-    post.update_attributes(post_params)
+    @post.update_attributes(post_params)
     respond_with(post)
   end
 
   def destroy
-    post.destroy
+    @post.destroy
     respond_with(post)
   end
 

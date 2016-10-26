@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :posts
-  get 'posts/new', to:'posts#new'
+  
 
 
 
