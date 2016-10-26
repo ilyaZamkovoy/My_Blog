@@ -1,0 +1,21 @@
+.show-item
+  .well.post.form-horizontal
+
+    .control-group
+      label.control-label
+        | Title
+      .controls
+        .input-xlarge.uneditable-input.string.span7
+          = post.title
+    .control-group
+      label.control-label
+        | Text
+      .controls
+        .input-xlarge.uneditable-input.string.span7
+          = post.text
+  .form-actions
+    = link_to(edit_post_path(post), class: 'btn btn-primary') do
+      i.fi-pencil
+      | Edit
+    '  or
+    = link_to 'Back', :back

@@ -1,0 +1,29 @@
+table.table.table-striped
+  thead
+    tr
+        th Title
+        th Text
+        th Actions
+
+  - @posts.each do |post|
+    tr
+      td= post.title
+      td= post.text
+      td.actions
+        = link_to post, class: 'btn' do
+          i.fi-eye
+          |  Show
+        = link_to edit_post_path(post), class: 'btn' do
+          i.fi-pencil
+          |  Edit
+        = link_to post, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } do
+          i.fi-trash
+          |  Delete
+
+
+br
+= link_to new_post_path, class: 'btn btn-primary' do
+  i.fi-plus
+  |  New Post
+
+
