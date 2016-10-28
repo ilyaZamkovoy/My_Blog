@@ -14,10 +14,10 @@ class PeopleController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def index
-    @user_posts = current_user.posts
     @users = User.all.where("id != ?", current_user.id)
   end
 end

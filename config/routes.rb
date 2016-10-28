@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   get "people/index"
 
-  get "people/show"
+  get "people/:id", to: "people#show", as: "user"
+
+  resources :users
+
+
   resources :posts
 
   devise_for :users, controllers: { registrations: "users/registrations" }
