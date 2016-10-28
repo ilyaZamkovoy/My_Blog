@@ -1,0 +1,23 @@
+table.table.table-striped
+  thead
+    tr
+        th Title
+        th Text
+        th Actions
+
+  - @users.each do |user|
+    -if user != current_user
+      - user.posts.each do |post|
+        tr
+          td= post.title
+          td= post.text
+          td.actions
+            = link_to user.full_name, people_show_path
+
+
+
+br
+= link_to new_post_path, class: 'btn btn-primary' do
+  i.fi-plus
+  |  New Post
+

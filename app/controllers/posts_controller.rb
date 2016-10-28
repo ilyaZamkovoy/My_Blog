@@ -15,12 +15,6 @@ class PostsController < ApplicationController
     @posts = current_user.posts
   end
 
-  def all_users_posts
-    @posts = Post.all
-    @user_posts = current_user.posts
-    @all_users = User.all
-  end
-
   def update
     post.update_attributes(post_params)
     respond_with(post)
