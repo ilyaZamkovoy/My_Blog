@@ -6,13 +6,12 @@ table.table.table-striped
         th Actions
 
   - @users.each do |user|
-    -if user != current_user
-      - user.posts.each do |post|
-        tr
-          td= post.title
-          td= post.text
-          td.actions
-            = link_to user.full_name, people_show_path
+    - user.posts.each do |post|
+      tr
+        td= post.title
+        td= post.text
+        td.actions
+          = link_to user.full_name, people_show_path
 
 
 

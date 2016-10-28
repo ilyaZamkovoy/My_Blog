@@ -18,6 +18,6 @@ class PeopleController < ApplicationController
 
   def index
     @user_posts = current_user.posts
-    @users = User.all
+    @users = User.all.where("id != ?", current_user.id)
   end
 end
