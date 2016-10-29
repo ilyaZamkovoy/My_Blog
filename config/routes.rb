@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'subscription/new'
+
+  get 'subscription/update'
+
+  get 'subscription/destroy'
+
+  get 'subscription/show'
+
   get "people/new"
 
   get "people/create"
@@ -10,9 +18,6 @@ Rails.application.routes.draw do
   get "people/index"
 
   get "people/:id", to: "people#show", as: "user"
-
-  resources :users
-
 
   resources :posts
 

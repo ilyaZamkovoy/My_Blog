@@ -1,0 +1,15 @@
+.row
+  .columns
+    h2 = title("#{@user.full_name}")
+    h3 = title("email: #{@user.email}")
+  table.table.table-striped
+    thead
+      tr
+        th Title
+        th Text
+    -@user_posts.each do |post|
+      tr
+        td = post.title
+        td = post.text
+
+  = button_to "subscription", to: "subscription/new"
