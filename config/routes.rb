@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get "people/index"
 
+  get "subscription/create/:id", to: "subscription#create", as: "subscription"
+
   get "people/:id", to: "people#show", as: "user"
 
   resources :posts
