@@ -1,6 +1,5 @@
 class SubscriptionController < ApplicationController
   def new
-
   end
 
   def create
@@ -10,7 +9,7 @@ class SubscriptionController < ApplicationController
   end
 
   def destroy
-  	subscription.destroy
+    subscription.destroy
     respond_with(subscription)
   end
 

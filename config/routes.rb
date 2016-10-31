@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'subscription/new'
+  get "subscription/new"
 
-  get 'subscription/update'
+  get "subscription/update"
 
-  get 'subscription/destroy'
+  get "subscription/destroy"
 
-  get 'subscription/show'
+  get "subscription/show"
 
   get "people/new"
 
