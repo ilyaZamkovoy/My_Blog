@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get "people/create"
 
-  get "people/destroy"
+  get "people/destroy/:id", to: "subscription#destroy", as: "destroysub"
 
   get "people/update"
 

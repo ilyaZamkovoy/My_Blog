@@ -9,8 +9,14 @@ class SubscriptionController < ApplicationController
   end
 
   def destroy
-    subscription.destroy
-    respond_with(subscription)
+    @user = User.find(params[:id])
+    subs = current_user.subscriptions
+    subs.each do |s|
+      if s.blogger == @user.id
+        s.destroy
+      end
+    end
+    redirect_to user_path(@user)
   end
 
   def show

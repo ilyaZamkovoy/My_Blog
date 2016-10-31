@@ -16,6 +16,13 @@ class PeopleController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_posts = @user.posts
+    subscription = current_user.subscriptions
+    @check = false
+    subscription.each do |s|
+      if s.blogger == @user.id
+        @check = true
+      end
+    end
   end
 
   def index

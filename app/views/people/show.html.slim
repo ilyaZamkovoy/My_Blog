@@ -1,6 +1,6 @@
 .row
   .columns
-    h2 = title(to_s(@user.full_name))
+    h2 = title("#{@user.full_name}")
     h3 = title("email: #{@user.email}")
   table.table.table-striped
     thead
@@ -11,5 +11,7 @@
       tr
         td = post.title
         td = post.text
-
-  = link_to "subscribe", subscription_path(@user)
+  -if @check == false
+    = link_to "follow", subscription_path(@user)
+  -else
+    = link_to "unfollow", destroysub_path(@user)
