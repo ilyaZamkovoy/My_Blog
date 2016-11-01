@@ -1,17 +1,8 @@
 Rails.application.routes.draw do
-  get "subscription/new"
-
-  get "subscription/update"
-
-  get "subscription/destroy"
 
   get "subscription/show"
 
   get "subscription/index"
-
-  get "people/new"
-
-  get "people/create"
 
   get "people/destroy/:id", to: "subscription#destroy", as: "destroysub"
 

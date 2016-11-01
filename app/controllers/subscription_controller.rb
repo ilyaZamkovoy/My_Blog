@@ -21,9 +21,17 @@ class SubscriptionController < ApplicationController
   end
 
   def index
-  end
-
-  def subscription_params
-    params.require(:subscription).permit(:blogger)
+    subs = current_user.subscriptions
+    users = User.all.where("id != ?", current_user.id)
+    @finalArr = Array.new
+    y = 0
+    subs.each do |s|
+      users.each do |u|
+        if s.blogger = u.id
+          @finalArr.insert(y,u)
+          y+=1
+        end
+      end
+    end
   end
 end

@@ -16,14 +16,14 @@ class PeopleController < ApplicationController
   def show
     @user = User.find(params[:id])
     @user_posts = @user.posts
-    subscription = current_user.subscriptions
+    subs = current_user.subscriptions
     @check = false
-    subscription.each do |s|
+    subs.each do |s|
       @check = true if s.blogger == @user.id
     end
   end
 
   def index
-    @users = User.all.where("id != ?", current_user.id)
+    @users = User.where.not(id: current_user.id)
   end
 end
