@@ -19,9 +19,7 @@ class PeopleController < ApplicationController
     subscription = current_user.subscriptions
     @check = false
     subscription.each do |s|
-      if s.blogger == @user.id
-        @check = true
-      end
+      @check = true if s.blogger == @user.id
     end
   end
 

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get "subscription/show"
 
+  get "subscription/index"
+
   get "people/new"
 
   get "people/create"

@@ -1,7 +1,7 @@
 .row
   .columns
-    h2 = title("#{@user.full_name}")
-    h3 = title("email: #{@user.email}")
+    h2 = title(@user.full_name.to_s)
+    h3 = title(@user.email.to_s)
   table.table.table-striped
     thead
       tr
