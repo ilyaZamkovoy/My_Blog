@@ -22,15 +22,11 @@ class SubscriptionController < ApplicationController
 
   def index
     subs = current_user.subscriptions
-    users = User.all.where("id != ?", current_user.id)
-    @finalArr = Array.new
-    y = 0
+    users = User.where.not(id: current_user.id)
+    @final_arr = []
     subs.each do |s|
       users.each do |u|
-        if s.blogger = u.id
-          @finalArr.insert(y,u)
-          y+=1
-        end
+        @final_arr.push(u) if s.blogger == u.id
       end
     end
   end
