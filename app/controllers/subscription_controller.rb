@@ -23,11 +23,16 @@ class SubscriptionController < ApplicationController
   def index
     subs = current_user.subscriptions
     users = User.where.not(id: current_user.id)
-    @final_arr = []
+    final_arr = []
     subs.each do |s|
       users.each do |u|
-        @final_arr.push(u) if s.blogger == u.id
+        if s.blogger == u.id
+          u.posts.each do |post|
+            final_arr.push(post)
+          end
+        end
       end
     end
+    @sorted = final_arr.sort_by &:created_at
   end
 end

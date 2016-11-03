@@ -5,13 +5,13 @@ table.table.table-striped
         th Text
         th Actions
 
-  - @final_arr.each do |user|
-    - user.posts.each do |post|
+  - @sorted.each do |post|
+    
       tr
         td= post.title
         td= post.text
         td.actions
-          = link_to user.full_name, user_path(user)
+          = link_to User.find(post.user_id).full_name, user_path(User.find(post.user_id))
 
 
 br
