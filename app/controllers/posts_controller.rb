@@ -7,11 +7,10 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.create(post_params)
-
     respond_with(post)
   end
 
-  def index
+  def index # Showing current_users posts
     @posts = current_user.posts
   end
 
