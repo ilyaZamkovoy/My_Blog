@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get "people/:id", to: "people#show", as: "user"
 
-  get "comments/show/:id", to: "comments#show", as: "comment"
+  get "posts/show/:id", to: "posts#show", as: "post"
 
   resources :posts
 
