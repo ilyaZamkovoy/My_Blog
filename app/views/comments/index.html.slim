@@ -1,0 +1,29 @@
+table.table.table-striped
+  thead
+    tr
+        th Text
+        th Actions
+
+  - comments.each do |comment|
+    tr
+      td= comment.text
+      td.actions
+        = link_to(comment, class: 'btn') do
+          i.fi-eye
+          |  Show
+        = link_to(edit_comment_path(comment), class: 'btn') do
+          i.fi-pencil
+          |  Edit
+        = link_to(comment, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) do
+          i.fi-trash
+          |  Delete
+
+.paginator
+  = paginate(comments)
+
+br
+= link_to new_comment_path, class: 'btn btn-primary' do
+  i.fi-plus
+  |  New Comment
+
+

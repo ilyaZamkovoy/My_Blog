@@ -24,6 +24,10 @@ class PostsController < ApplicationController
     respond_with(post)
   end
 
+  def show
+    
+  end
+
   private
 
   def post_params

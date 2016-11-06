@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   get "subscription/show"
 
   get "subscription/index"
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   get "subscription/create/:id", to: "subscription#create", as: "subscription"
 
   get "people/:id", to: "people#show", as: "user"
+
+  get "comments/show/:id", to: "comments#show", as: "comment"
 
   resources :posts
 
