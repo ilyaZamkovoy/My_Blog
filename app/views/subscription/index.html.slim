@@ -1,0 +1,21 @@
+table.table.table-striped
+  thead
+    tr
+        th Title
+        th Text
+        th Actions
+  - @final_arr.sort_by(&:created_at)
+  - @final_arr.each do |post|
+    tr
+      td= post.title
+      td= post.text
+      td.actions
+        = link_to User.find(post.user_id).full_name, user_path(User.find(post.user_id))
+
+
+br
+= link_to new_post_path, class: "btn btn-primary" do
+  i.fi-plus
+  |  New Post
+
+

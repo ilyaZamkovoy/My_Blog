@@ -7,6 +7,8 @@ gem "pg"
 gem "rename", "~> 1.0", ">= 1.0.2"
 gem "sprockets", "3.6.3"
 gem "ruby-beautify", "~> 0.97.3"
+gem "will_paginate",           "3.1.0"
+gem "bootstrap-will_paginate", "0.0.10"
 # assets
 gem "autoprefixer-rails"
 gem "coffee-rails"
