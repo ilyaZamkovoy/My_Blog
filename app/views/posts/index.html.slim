@@ -7,7 +7,7 @@ table.table.table-striped
 
   - @posts.each do |post|
     tr
-      td= post.title
+      td = link_to post.title, post
       td= post.text
       td.actions
         = link_to post, class: "btn" do

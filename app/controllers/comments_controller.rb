@@ -5,8 +5,10 @@ class CommentsController < ApplicationController
   expose :comments, -> { Comment.page(params[:page]) }
 
   def create
-    comment.save
+    @comment = current_user.comments.create(comment_params)
     respond_with(comment)
+    @post = Post.find(params[:id])
+    redirect_to post_path(@post)
   end
 
   def update
@@ -22,6 +24,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:text)
+    post = Post.find(params[:id])
+    params.require(:comment).permit(:text, post_id: post.id)
   end
 end

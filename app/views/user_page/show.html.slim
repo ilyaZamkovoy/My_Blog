@@ -12,6 +12,6 @@
         td = post.title
         td = post.text
   -if @check == false
-    = link_to "follow", subscription_path(@user)
+    = link_to "follow", @user
   -else
-    = link_to "unfollow", destroysub_path(@user)
+    = link_to "unfollow", user_subscription_path(@user, @sub)

@@ -1,20 +1,15 @@
 class SubscriptionController < ApplicationController
   def create # Creating a new subscription and redirect to choosing user page
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @subscription = current_user.subscriptions.create(blogger: @user.id)
-    redirect_to user_path(@user)
+    redirect_to user_page_path(@user)
   end
 
   def destroy # Destroying subscription and redirect to choosing user page
-    @user = User.find(params[:id])
-    subs = current_user.subscriptions
-    subs.each do |s|
-      s.destroy if s.blogger == @user.id
-    end
-    redirect_to user_path(@user)
-  end
-
-  def show
+    @user = User.find(params[:user_id])
+    sub = subscription.find(params[:id])
+    sub.destroy
+    redirect_to user_page_path(@user)
   end
 
   def index # Showing feed with all current_user subscriprions

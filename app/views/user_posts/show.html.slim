@@ -10,16 +10,6 @@ table.table.table-striped
       td.actions
         = link_to User.find(@post.user_id).full_name, user_path(User.find(@post.user_id))
 
-.scaffold-form
-  = simple_form_for(comment) do |f|
-    .form-inputs
-      = f.input :text
-
-    .form-actions
-      = f.button :submit
-
-
-
 
 br
   .form-actions

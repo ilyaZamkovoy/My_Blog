@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   expose :post
 
   def create
-    @post = current_user.posts.create(post_params)
+    post = current_user.posts.create(post_params)
     respond_with(post)
   end
 
@@ -24,8 +24,8 @@ class PostsController < ApplicationController
     respond_with(post)
   end
 
-  def show
-    
+  def show #for showing choosing post by current_user
+    @post = Post.find(params[:id])
   end
 
   private

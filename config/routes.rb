@@ -1,23 +1,27 @@
 Rails.application.routes.draw do
   resources :comments
+
   get "subscription/show"
 
   get "subscription/index"
 
-  get "people/destroy/:id", to: "subscription#destroy", as: "destroysub"
-
-  get "people/update"
-
-  get "people/index"
-
   get "subscription/create/:id", to: "subscription#create", as: "subscription"
 
-  get "people/:id", to: "people#show", as: "user"
+  get "page/users/:id", to: "user_page#show", controller: "user_page", as: "user_page"
 
-  get "posts/show/:id", to: "posts#show", as: "post"
+  resources :posts, only: [:index, :new, :update, :destroy, :edit]
 
-  resources :posts
+  resources :recent_posts, only: :index
 
-  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_for :users, controllers: { registrations: "users/registrations"}
+
+  resources :users do
+    resources :posts, only: [:index, :show], shallow: true, controller: "user_posts"
+  end
+
+  resources :users do
+      resources :subscription, only: [:create, :destroy, :index], controller: "subscription"
+  end
+
   root to: "pages#home"
 end
