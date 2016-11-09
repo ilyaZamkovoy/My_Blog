@@ -4,11 +4,16 @@ class CommentsController < ApplicationController
   expose :comment
   expose :comments, -> { Comment.page(params[:page]) }
 
+  def new
+  end
+
+  def show
+    redirect_to comment.post
+  end
+
   def create
     @comment = current_user.comments.create(comment_params)
-    respond_with(comment)
-    @post = Post.find(params[:id])
-    redirect_to post_path(@post)
+    redirect_to @comment.post
   end
 
   def update
@@ -18,13 +23,12 @@ class CommentsController < ApplicationController
 
   def destroy
     comment.destroy
-    respond_with(comment)
+    redirect_to comment.post
   end
 
   private
 
   def comment_params
-    post = Post.find(params[:id])
-    params.require(:comment).permit(:text, post_id: post.id)
+    params.require(:comment).permit(:text, :post_id)
   end
 end

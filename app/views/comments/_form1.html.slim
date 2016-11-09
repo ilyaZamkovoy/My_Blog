@@ -1,6 +1,5 @@
 .scaffold-form
-  = simple_form_for([@post,@post.comments.new]) do |f|
-    = f.input :post_id, value: @post.id, as: :hidden
+  = simple_form_for(comment) do |f|
     .form-inputs
       = f.input :text
 

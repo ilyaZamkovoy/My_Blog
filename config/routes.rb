@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  resources :comments
-
-  get "subscription/show"
-
-  get "subscription/index"
-
-  get "subscription/create/:id", to: "subscription#create", as: "subscription"
-
-  get "page/users/:id", to: "user_page#show", controller: "user_page", as: "user_page"
-
   resources :posts, only: [:index, :new, :update, :destroy, :edit]
 
   resources :recent_posts, only: :index
@@ -20,8 +10,20 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-      resources :subscription, only: [:create, :destroy, :index], controller: "subscription"
+      resources :subscriptions, only: [:create], shallow: true, controller: "subscription"
   end
+
+  resources :users do
+    get "page", to: "guest#show", as: "guest"
+  end
+
+  resources :subscriptions, only: [:index, :destroy], shallow: true, controller: "subscription"
+
+  resources :post do
+    resources :comments, only: [:create]
+  end
+
+  resources :comments, only: [:update, :destroy, :new, :edit, :show]
 
   root to: "pages#home"
 end

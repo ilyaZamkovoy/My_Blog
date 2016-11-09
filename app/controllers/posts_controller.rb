@@ -24,10 +24,6 @@ class PostsController < ApplicationController
     respond_with(post)
   end
 
-  def show #for showing choosing post by current_user
-    @post = Post.find(params[:id])
-  end
-
   private
 
   def post_params

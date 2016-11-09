@@ -12,9 +12,13 @@ table.table.table-striped
         = link_to post.user.full_name
 
 
+- if user_signed_in?
+  br
+  = link_to new_post_path, class: "btn btn-primary" do
+    i.fi-plus
+    |  New Post
 
 br
-= link_to new_post_path, class: "btn btn-primary" do
-  i.fi-plus
-  |  New Post
+  .form-actions
+    = link_to "Back", :back
 
