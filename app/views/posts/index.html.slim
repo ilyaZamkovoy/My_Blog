@@ -1,25 +1,22 @@
 table.table.table-striped
-  thead
-    tr
-        th Title
-        th Text
-        th Actions
-
   - @posts.each do |post|
     tr
-      td = link_to post.title, post
-      td= post.text
-      td.actions
-        = link_to post, class: "btn" do
-          i.fi-eye
-          |  Show
-        = link_to edit_post_path(post), class: "btn" do
-          i.fi-pencil
-          |  Edit
-        = link_to post, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } do
-          i.fi-trash
-          |  Delete
-
+      td(align="center", colspan="2")
+        h4 = link_to post.title, post
+    tr(margin-top: 20px )
+      td(align="center")
+        h5 = post.text
+      td.actions(align="center")
+        h5
+          = link_to post, class: "btn" do
+            i.fi-eye
+            |  Show
+          = link_to edit_post_path(post), class: "btn" do
+            i.fi-pencil
+            |  Edit
+          = link_to post, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } do
+            i.fi-trash
+            |  Delete
 
 br
 = link_to new_post_path, class: "btn btn-primary" do
