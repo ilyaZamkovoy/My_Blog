@@ -26,7 +26,4 @@ Rails.application.routes.draw do
   resources :comments, only: [:update, :destroy, :new, :edit, :show]
 
   root to: "recent_posts#index"
-
-
-  
 end
