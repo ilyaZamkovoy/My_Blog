@@ -1,4 +1,6 @@
 class SubscriptionController < ApplicationController
+  before_action :authenticate_user!
+
   def create # Creating a new subscription and redirect to choosing user page
     @user = User.find(params[:user_id])
     @subscription = current_user.subscriptions.create(blogger: @user.id)
@@ -15,9 +17,8 @@ class SubscriptionController < ApplicationController
   def index # Showing feed with all current_user subscriprions
     @final_arr = []
     current_user.subscriptions.each do |s|
-      posts = Post.all.includes(:user)
-       posts.each do |p|
-        @final_arr.push(p) if s.blogger == p.user.id
+      Post.all.includes(:user).each do |post|
+        @final_arr.push(post) if s.blogger == p.user.id
       end
     end
   end

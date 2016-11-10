@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :recent_posts, only: :index
 
-  devise_for :users, controllers: { registrations: "users/registrations"}
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :users do
     resources :posts, only: [:index, :show], shallow: true, controller: "user_posts"
@@ -25,5 +25,5 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:update, :destroy, :new, :edit, :show]
 
-  root to: "pages#home"
+  root to: "posts#index"
 end
