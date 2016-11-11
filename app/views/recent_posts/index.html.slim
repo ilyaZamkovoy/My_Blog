@@ -1,16 +1,8 @@
-table.table.table-striped
-  thead
-    tr
-        th Title
-        th Text
-        th Actions
-  - @posts.each do |post|
-    tr
-      td = link_to post.title, post_path(post)
-      td = post.text
-      td.actions
-        = link_to post.user.full_name
-
+- @posts.each do |post|
+  h4 = link_to post.title, post
+  p = post.text
+  h5
+    = link_to post.user.full_name
 
 - if user_signed_in?
   br

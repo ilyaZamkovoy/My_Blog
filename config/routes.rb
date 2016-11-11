@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts, only: [:index, :new, :update, :destroy, :edit]
+  resources :posts, only: [:index, :new, :update, :destroy, :edit, :create]
 
   resources :recent_posts, only: :index
 

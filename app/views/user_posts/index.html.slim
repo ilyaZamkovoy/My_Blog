@@ -1,17 +1,9 @@
-table.table.table-striped
-  thead
-    tr
-        th Title
-        th Text
-        th Actions
-  - @posts.each do |post|
-    tr
-      td = link_to post.title, post
-      td = post.text
-      td.actions
-        = link_to post.user.full_name, @user
-
-
+= paginate @posts, param_name: :user_posts_page
+- @posts.each do |post|
+  h4 = link_to post.title, post
+  p = post.text
+  h5
+    = link_to post.user.full_name, @user
 
 br
 = link_to new_post_path, class: "btn btn-primary" do
