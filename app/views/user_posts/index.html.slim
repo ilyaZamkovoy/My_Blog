@@ -1,10 +1,11 @@
-= paginate @posts, param_name: :user_posts_page
 - @posts.each do |post|
-  h4 = link_to post.title, post
-  p = post.text
-  h5
-    = link_to post.user.full_name, @user
-
+	table (class = "large-8 large-centered columns")
+	  tr
+	    th (rowspan="2", style="width:50%") = truncate(post.text, length: 80)
+	    td = link_to post.title, post
+	  tr
+	    td = link_to post.user.full_name, post.user
+= paginate @posts, param_name: :recent_posts_page
 br
 = link_to new_post_path, class: "btn btn-primary" do
   i.fi-plus

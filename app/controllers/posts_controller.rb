@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   expose_decorated :post
 
   def create
-    post = current_user.posts.create(post_params)
+    current_user.posts.create(post_params)
     redirect_to posts_path
   end
 

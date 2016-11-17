@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   expose :comment
   expose :comments, -> { Comment.page(params[:page]) }
-  expose :post_id
+  expose_decorated :post
 
   def new
   end
@@ -13,13 +13,12 @@ class CommentsController < ApplicationController
   end
 
   def create
-    post = post
     check = current_user.comments.create(comment_params).valid?
     if check
       redirect_to post
     else
       respond_to do |format|
-        format.html { redirect_to post, notice: 'comment cant be empty' }
+        format.html { redirect_to post, notice: "comment cant be empty" }
       end
     end
   end
