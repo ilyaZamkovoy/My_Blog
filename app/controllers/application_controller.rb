@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include Authentication
   include Authorization
 
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 
   responders :flash
   respond_to :html
