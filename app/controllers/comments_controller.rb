@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 
   expose :comment
   expose :comments, -> { Comment.page(params[:page]) }
+  expose :post_id
 
   def new
   end
@@ -12,7 +13,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    post = Post.find(params[:post_id])
+    post = post
     check = current_user.comments.create(comment_params).valid?
     if check
       redirect_to post

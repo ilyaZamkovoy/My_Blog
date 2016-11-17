@@ -415,7 +415,7 @@ DEPENDENCIES
   decent_exposure
   devise
   dotenv-rails
-  draper
+  draper (~> 2.1)
   email_spec
   factory_girl_rails
   faker

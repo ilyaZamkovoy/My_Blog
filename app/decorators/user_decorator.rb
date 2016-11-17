@@ -1,7 +1,18 @@
 class UserDecorator < ApplicationDecorator
-  delegate :id, :full_name, :email
 
-  def full_name_with_email
-    "#{object.full_name} (#{object.email})"
+  def full_name_with_email(user)
+    "#{user.full_name} (#{user.email})"
+  end
+  def full_name
+  	object.full_name
+  end
+  def email
+  	object.email
+  end
+  def posts
+  	object.posts
+  end
+  def id
+  	object.id
   end
 end

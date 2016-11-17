@@ -1,5 +1,7 @@
 class GuestController < ApplicationController
+  expose_decorated :user
+
   def show
-    @user = User.find(params[:user_id])
+    user
   end
 end

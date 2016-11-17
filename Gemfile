@@ -9,6 +9,7 @@ gem "sprockets", "3.6.3"
 gem "ruby-beautify", "~> 0.97.3"
 gem "html_truncator", "~>0.2"
 
+
 # assets
 gem "autoprefixer-rails"
 gem "coffee-rails"
@@ -32,7 +33,7 @@ gem "slim"
 gem "decent_decoration"
 gem "decent_exposure"
 gem "devise"
-gem "draper"
+gem "draper", "~> 2.1"
 gem "flamegraph"
 gem "google-analytics-rails"
 gem "health_check"

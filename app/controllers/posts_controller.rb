@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   respond_to :html
 
-  expose :post
+  expose_decorated :post
 
   def create
     post = current_user.posts.create(post_params)

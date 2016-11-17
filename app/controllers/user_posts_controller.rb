@@ -1,13 +1,13 @@
 class UserPostsController < ApplicationController
   before_action :authenticate_user!
+  expose_decorated :user
+  expose_decorated :post
 
   def index
-    @user = User.find(params[:user_id])
-    @posts = @user.posts.order(created_at: :desc).page(params[:user_posts_page]).per(10)
+    @posts = user.posts.order(created_at: :desc).page(params[:user_posts_page]).per(10)
   end
 
   def show
-    @post = Post.find(params[:id])
-    @comments = @post.comments.includes(:user)
+    @comments = post.comments.includes(:user)
   end
 end

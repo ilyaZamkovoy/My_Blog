@@ -1,7 +1,6 @@
 .row
   .columns
-    h2 = title(@user.full_name)
-    h3 = title(@user.email)
+    @user.full_name_with_email
   table.table.table-striped
     thead
       tr
