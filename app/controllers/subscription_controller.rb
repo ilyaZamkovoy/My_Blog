@@ -1,27 +1,24 @@
 class SubscriptionController < ApplicationController
+  before_action :authenticate_user!
+  expose_decorated :user
+  expose_decorated :subscription
+
   def create # Creating a new subscription and redirect to choosing user page
-    @user = User.find(params[:id])
-    @subscription = current_user.subscriptions.create(blogger: @user.id)
-    redirect_to user_path(@user)
+    @subscription = current_user.subscriptions.create(blogger: user.id)
+    redirect_to user_page_path(@user)
   end
 
   def destroy # Destroying subscription and redirect to choosing user page
-    @user = User.find(params[:id])
-    subs = current_user.subscriptions
-    subs.each do |s|
-      s.destroy if s.blogger == @user.id
-    end
-    redirect_to user_path(@user)
-  end
-
-  def show
+    @user = User.find(sub.blogger)
+    subscription.destroy
+    redirect_to user_page_path(@user)
   end
 
   def index # Showing feed with all current_user subscriprions
     @final_arr = []
     current_user.subscriptions.each do |s|
-      User.where.not(id: current_user.id).each do |u|
-        u.posts.each { |p| @final_arr.push(p) } if s.blogger == u.id
+      Post.all.includes(:user).each do |post|
+        @final_arr.push(post) if s.blogger == p.user.id
       end
     end
   end

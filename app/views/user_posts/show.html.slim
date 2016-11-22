@@ -1,0 +1,38 @@
+table.table.table-striped
+  thead
+    tr
+        th Title
+        th Text
+        th Actions
+    tr
+      td = post.title
+      td = post.text
+      td.actions
+        - if user_signed_in?
+          = link_to post.user.full_name, post.user
+        - else
+          = link_to post.user.full_name, user_guest_path(post.user)
+- if user_signed_in?
+  = render 'comments/form'
+
+table.table.table-striped
+  thead
+    tr
+      th Text
+      th Actions
+    -@comments.each do |comment|
+      tr
+        td = comment.text
+        td.actions
+          - if current_user != comment.user
+            -if user_signed_in?
+              = link_to comment.user.full_name, comment.user
+            - else
+              = link_to comment.user.full_name, user_guest_path(comment.user)
+          - else
+            = link_to  edit_comment_path(comment), class: "btn" do
+              i.fi-pencil
+              |  Edit
+            = link_to comment, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } do
+              i.fi-trash
+              |  Delete

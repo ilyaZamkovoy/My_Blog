@@ -1,0 +1,14 @@
+- @posts.each do |post|
+	table (class = "large-8 large-centered columns")
+	  tr
+	    th (rowspan="2", style="width:50%") = truncate(post.text, length: 80)
+	    td = link_to post.title, post
+	  tr
+	    td = link_to post.user.full_name, post.user
+= paginate @posts, param_name: :recent_posts_page
+br
+- if user_signed_in?
+  br
+  = link_to new_post_path, class: "large-10 large-centered columns" do
+    i.fi-plus
+    |  New Post

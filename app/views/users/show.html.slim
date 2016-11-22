@@ -1,0 +1,18 @@
+.row
+  .columns
+    h2 = title(user.full_name)
+    h3 = title(user.email)
+  table.table.table-striped
+    thead
+      tr
+        th Title
+        th Text
+    -user.posts.each do |post|
+      tr
+        td = post.title
+        td = post.text
+  -unless user == current_user
+    -if @check == false
+      = link_to "follow", subscriptions_path(@user), method: :post
+    -else
+      = link_to "unfollow", subscription_path(@sub), method: :delete

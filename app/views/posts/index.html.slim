@@ -1,15 +1,10 @@
-table.table.table-striped
-  thead
+- @posts.each do |post|
+  table (class = "large-8 large-centered columns")
     tr
-        th Title
-        th Text
-        th Actions
-
-  - @posts.each do |post|
+      th (rowspan="2", style="width:50%") = truncate(post.text, length: 80)
+      td = link_to post.title, post
     tr
-      td= post.title
-      td= post.text
-      td.actions
+      td
         = link_to post, class: "btn" do
           i.fi-eye
           |  Show
@@ -19,7 +14,7 @@ table.table.table-striped
         = link_to post, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } do
           i.fi-trash
           |  Delete
-
+= paginate @posts, param_name: :recent_posts_page
 
 br
 = link_to new_post_path, class: "btn btn-primary" do

@@ -3,15 +3,13 @@ class PostsController < ApplicationController
 
   respond_to :html
 
-  expose :post
-
   def create
-    @post = current_user.posts.create(post_params)
-    respond_with(post)
+    current_user.posts.create(post_params)
+    redirect_to posts_path
   end
 
   def index # Showing current_users posts
-    @posts = current_user.posts
+    @posts = current_user.posts.page(params[:posts_page]).per(10)
   end
 
   def update

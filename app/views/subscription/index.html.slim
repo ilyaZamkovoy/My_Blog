@@ -10,7 +10,7 @@ table.table.table-striped
       td= post.title
       td= post.text
       td.actions
-        = link_to User.find(post.user_id).full_name, user_path(User.find(post.user_id))
+        = link_to post.user.full_name, post.user
 
 
 br

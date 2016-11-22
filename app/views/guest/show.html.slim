@@ -7,11 +7,7 @@
       tr
         th Title
         th Text
-    -@user_posts.each do |post|
+    -@user.posts.each do |post|
       tr
         td = post.title
         td = post.text
-  -if @check == false
-    = link_to "follow", subscription_path(@user)
-  -else
-    = link_to "unfollow", destroysub_path(@user)

@@ -1,0 +1,8 @@
+.scaffold-form(class = "small-6 small-centered columns")
+  = simple_form_for([post,post.comments.new]) do |f|
+    = f.input :post_id, value: post.id, as: :hidden
+    .form-inputs
+      = f.input :text
+
+    .form-actions
+      = f.button :submit
