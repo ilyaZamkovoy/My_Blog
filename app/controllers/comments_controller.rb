@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
   respond_to :html
-
   expose :comment
-  expose :comments, -> { Comment.page(params[:page]) }
+  post.comments.page(params[:page])
   expose_decorated :post
 
   def new
@@ -13,12 +12,12 @@ class CommentsController < ApplicationController
   end
 
   def create
-    check = current_user.comments.create(comment_params).valid?
-    if check
+    current_user.comments.create(comment_params)
+    if comment.save
       redirect_to post
     else
       respond_to do |format|
-        format.html { redirect_to post, notice: "comment cant be empty" }
+        format.html { redirect_to post, alert: "comment cant be empty" }
       end
     end
   end

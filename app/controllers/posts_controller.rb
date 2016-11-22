@@ -3,8 +3,6 @@ class PostsController < ApplicationController
 
   respond_to :html
 
-  expose_decorated :post
-
   def create
     current_user.posts.create(post_params)
     redirect_to posts_path
