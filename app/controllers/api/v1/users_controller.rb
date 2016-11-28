@@ -1,36 +1,43 @@
 class Api::V1::UsersController < ApplicationController
+  respond_to :json
+  before_filter :find_user, only: [:show, :update, :destroy]
+
+  def index
+    @users = User.all
+    respond_with @users
+  end
+
   def show
-    render json: User.find(params[:id])
+    respond_with @user
   end
 
   def create
-    user = User.new(users_params)
-    if user.save
-      render json: user, status: 201, location: [:api, user]
-    else
-      render json: { errors: user.errors }, status: 422
-    end
+    @user = User.create(user_params)
+    respond_with @user, location: url_for([:api, :v1, @user])
   end
 
   def update
-    user = User.find(params[:id])
-
-    if user.update(user_params)
-      render json: user, status: 200, location: [:api, user]
-    else
-      render json: { errors: user.errors }, status: 422
-    end
+    @user.update_attributes(user_params)
+    respond_with @user
   end
 
   def destroy
-    user = User.find(params[:id])
-    user.destroy
-    head 204
+    @user.destroy
+    respond_with @user
   end
+
 
   private
 
-  def users_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+  def find_user
+    @user = User.find(params[:id])
   end
+
+  def user_params
+    params.require(:user).permit(
+      :email,
+      :password,
+      :full_name)
+  end
+
 end
