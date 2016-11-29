@@ -5,4 +5,8 @@ class Api::V1::PostsController < ApplicationController
   def show
     @post = Post.search(params.fetch(:qs, ""))
   end
+
+  def index
+    @posts = @current_user.posts
+  end
 end

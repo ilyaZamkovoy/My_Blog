@@ -11,7 +11,7 @@ class Api::V1::SessionsController < Devise::SessionsController
     return invalid_login_attempt unless @current_user
 
     if @current_user.valid_password?(params[:password])
-      sign_in("user", @current_user)
+      sign_in(@current_user)
       render json: {success: true, auth_token: @current_user.auth_token, email: @current_user.email}
       return
     end
@@ -19,7 +19,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    sign_out(@current_user_name)
+    sign_out(@current_user)
     render json: {message: "sign_out susccessfull"}
   end
 
