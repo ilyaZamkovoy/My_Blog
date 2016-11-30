@@ -7,6 +7,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def index
-    @posts = @current_user.posts
+    @posts = current_user.posts
+    render @posts
   end
 end

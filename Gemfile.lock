@@ -444,7 +444,6 @@ DEPENDENCIES
   memory_profiler
   metamagic
   newrelic_rpm
-  nokogiri (= 1.6.6.1)
   pg
   premailer-rails
   pry-rails

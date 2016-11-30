@@ -8,7 +8,6 @@ gem "rename", "~> 1.0", ">= 1.0.2"
 gem "sprockets", "3.6.3"
 gem "ruby-beautify", "~> 0.97.3"
 gem "html_truncator", "~>0.2"
-gem "nokogiri", "1.6.6.1"
 gem "simple_token_authentication"
 gem "devise-token_authenticatable"
 
