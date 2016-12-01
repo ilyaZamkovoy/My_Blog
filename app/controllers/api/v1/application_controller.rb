@@ -1,4 +1,4 @@
-class Api::V1::ApplicationController < ActionController::Base
+class Api::V1::ApplicationController < ActionController::API
   respond_to :json
 
   before_filter :set_current_user!
