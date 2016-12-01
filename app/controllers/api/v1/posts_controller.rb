@@ -1,6 +1,6 @@
 class Api::V1::PostsController < Api::V1::ApplicationController
   def show
-    @post = Post.search(params.fetch(:qs, ""))
+    @post = Post.find(params[:id])
   end
 
   def create
