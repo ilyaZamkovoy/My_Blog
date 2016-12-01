@@ -1,5 +1,5 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
-  skip_before_filter :authenticate_user!, only: %i(create)
+  skip_before_action :authenticate_user!, only: %i(create)
 
   def create
     build_resource(sign_up_params)
@@ -12,26 +12,14 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       message = "Failed to create new account for email #{sign_up_params[:email]}."
     end
 
-    respond_to do |format|
-      format.json {
-        render json: {
-          message: message
-        }, status: status
-      }
-    end
+    render json: { message: message }.to_json, status: status
   end
 
   def destroy
     resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
 
-    respond_to do |format|
-      format.json {
-        render json: {
-          message: 'Successfully deleted the account.'
-        }, status: HTTP_OK
-      }
-    end
+    render json: { message: "Successfully deleted the account." }.to_json
   end
 
   private

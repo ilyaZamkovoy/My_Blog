@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
     :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts, dependent: :destroy
@@ -15,6 +15,6 @@ class User < ActiveRecord::Base
   private
 
   def add_token
-    auth_token = SecureRandom.hex
+    SecureRandom.hex
   end
 end

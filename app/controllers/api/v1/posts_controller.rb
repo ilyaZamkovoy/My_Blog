@@ -22,12 +22,12 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    render json: {message: "post successfully deleted"}.to_json
+    render json: { message: "post successfully deleted" }.to_json
   end
 
   private
 
   def post_params
-  	params.require(:post).permit(:title, :text)
+    params.require(:post).permit(:title, :text)
   end
 end
