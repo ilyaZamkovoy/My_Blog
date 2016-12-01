@@ -1,7 +1,7 @@
 class Api::V1::SessionsController < Devise::SessionsController
   before_filter :authenticate_user!, only: %i(create)
   respond_to :json
-  
+
   #do i need session in api?
   def create
     @user = User.find_for_database_authentication(email: params[:email])
@@ -15,24 +15,12 @@ class Api::V1::SessionsController < Devise::SessionsController
 
   #do i need this?
   def destroy
-    if user_signed_in?
+    if current_user
       sign_out(current_user)
 
-      reswpond_to do |format|
-        format.json {
-          render json: {
-            message: 'Logged out successfully.'
-          }, status: HTTP_OK
-        }
-      end
+      render json: {message: "Logged out successfully."}.to_json
     else
-      respond_to do |format|
-        format.json {
-          render json: {
-            message: 'Failed to log out. User must be logged in.'
-          }
-        }
-      end
+      render json: {message: "Failed to log out. User must be logged in."}.to_json
     end
   end
 end
