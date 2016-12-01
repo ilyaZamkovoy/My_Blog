@@ -8,8 +8,6 @@ gem "rename", "~> 1.0", ">= 1.0.2"
 gem "sprockets", "3.6.3"
 gem "ruby-beautify", "~> 0.97.3"
 gem "html_truncator", "~>0.2"
-gem "simple_token_authentication"
-gem "devise-token_authenticatable"
 
 # assets
 gem "autoprefixer-rails"

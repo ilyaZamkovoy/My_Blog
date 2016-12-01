@@ -30,7 +30,14 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :posts
-      devise_for :users
+      resources :comments
+      devise_for :users, skip: %i(sessions registrations passwords)
+      devise_scope :user do
+        post 'login', to: 'sessions#create', as: :login
+        delete 'logout', to: 'sessions#destroy', as: :logout
+        post 'register', to: 'registrations#create', as: :register
+        delete 'delete_account', to: 'registrations#destroy', as: :delete_account
+      end
     end
   end
 end

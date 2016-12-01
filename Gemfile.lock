@@ -107,8 +107,6 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    devise-token_authenticatable (0.4.10)
-      devise (>= 3.5.2, < 4.0.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
     dotenv (2.0.2)
@@ -326,10 +324,6 @@ GEM
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
-    simple_token_authentication (1.14.0)
-      actionmailer (>= 3.2.6, < 6)
-      actionpack (>= 3.2.6, < 6)
-      devise (>= 3.2, < 6)
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -418,7 +412,6 @@ DEPENDENCIES
   decent_decoration
   decent_exposure
   devise
-  devise-token_authenticatable
   dotenv-rails
   draper (~> 2.1)
   email_spec
@@ -468,7 +461,6 @@ DEPENDENCIES
   seedbank
   shoulda-matchers
   simple_form
-  simple_token_authentication
   skim
   slim
   slim-rails
