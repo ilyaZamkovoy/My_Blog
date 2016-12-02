@@ -15,6 +15,6 @@ class User < ActiveRecord::Base
   private
 
   def add_token
-    SecureRandom.hex
+    self.auth_token = SecureRandom.hex
   end
 end

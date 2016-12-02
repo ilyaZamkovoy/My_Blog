@@ -17,7 +17,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
 
   def destroy
     resource.destroy
-    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    Devise.sign_out_all_scopes ? sign_out : sign_out(@current_user)
 
     render json: { message: "Successfully deleted the account." }.to_json
   end

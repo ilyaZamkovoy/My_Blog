@@ -15,8 +15,8 @@ class Api::V1::PostsController < Api::V1::ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if policy(@post).update?
-      @post.update_attributes(post_params)
+    authorize @post
+    if @post.update_attributes(post_params)
       respond_with @post
     else
       render json: { message: "its not your post" }.to_json
@@ -25,11 +25,11 @@ class Api::V1::PostsController < Api::V1::ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    if policy(@post).update?
-      @post.update_attributes(post_params)
-      respond_with @post
-    else
+    authorize @post
+    if @post.destroy
       render json: { message: "post successfully deleted" }.to_json
+    else
+      render json: { message: "its not your post" }.to_json
     end
   end
 

@@ -1,4 +1,5 @@
 class Api::V1::CommentsController < Api::V1::ApplicationController
+  after_action :verify_authorized
   def create
     @comment = @current_user.comments.create(comment_params)
     if @comment.save
@@ -10,8 +11,8 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    if policy(@comment).update?
-      @comment.update_attributes(comment_params)
+    authorize @comment
+    if @comment.update(comment_params)
       respond_with @comment
     else
       render json: { message: "its not your comment" }.to_json
@@ -20,8 +21,8 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    if policy(@comment).destroy?
-      @comment.destroy
+    authorize @comment
+    if @comment.destroy
       render json: { message: "comment successfully deleted" }.to_json
     else
       render json: { message: "its not your comment" }.to_json

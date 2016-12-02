@@ -1,5 +1,6 @@
 class Api::V1::ApplicationController < ActionController::Base
   include Pundit
+  include Api::V1::Concerns::Authorization
 
   respond_to :json
 
