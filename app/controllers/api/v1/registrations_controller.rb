@@ -1,5 +1,5 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
-  skip_before_action :authenticate_user!, only: %i(create)
+  skip_before_action :set_current_user, only: %i(create)
 
   def create
     build_resource(sign_up_params)
@@ -25,10 +25,6 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    devise_parameter_sanitizer.sanitize(:sign_up)
-  end
-
-  def json_request?
-    request.format.json?
+    params.require(:user).permit(:email, :password, :full_name)
   end
 end

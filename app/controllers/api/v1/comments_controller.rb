@@ -1,6 +1,6 @@
 class Api::V1::CommentsController < Api::V1::ApplicationController
   def create
-    @comment = current_user.comments.create(comment_params)
+    @comment = @current_user.comments.create(comment_params)
     if @comment.save
       respond_with @comment
     else
@@ -10,14 +10,22 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    @comment.update_attributes(comment_params)
-    respond_with @comment
+    if policy(@comment).update?
+      @comment.update_attributes(comment_params)
+      respond_with @comment
+    else
+      render json: { message: "its not your comment" }.to_json
+    end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
-    render json: { message: "comment successfully deleted" }.to_json
+    if policy(@comment).destroy?
+      @comment.destroy
+      render json: { message: "comment successfully deleted" }.to_json
+    else
+      render json: { message: "its not your comment" }.to_json
+    end
   end
 
   private

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  expose_decorated :post
 
   respond_to :html
 

@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   respond_to :html
   expose :comment
-  post.comments.page(params[:page])
   expose_decorated :post
 
   def new

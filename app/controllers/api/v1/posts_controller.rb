@@ -15,14 +15,22 @@ class Api::V1::PostsController < Api::V1::ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update_attributes(post_params)
-    respond_with @post
+    if policy(@post).update?
+      @post.update_attributes(post_params)
+      respond_with @post
+    else
+      render json: { message: "its not your post" }.to_json
+    end
   end
 
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
-    render json: { message: "post successfully deleted" }.to_json
+    if policy(@post).update?
+      @post.update_attributes(post_params)
+      respond_with @post
+    else
+      render json: { message: "post successfully deleted" }.to_json
+    end
   end
 
   private
