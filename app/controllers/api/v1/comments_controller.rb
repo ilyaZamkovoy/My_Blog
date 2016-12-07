@@ -1,5 +1,4 @@
 class Api::V1::CommentsController < Api::V1::ApplicationController
-  after_action :verify_authorized
   def create
     @comment = @current_user.comments.create(comment_params)
     if @comment.save
@@ -23,7 +22,7 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
     @comment = Comment.find(params[:id])
     authorize @comment
     if @comment.destroy
-      render json: { message: "comment successfully deleted" }.to_json
+      respond_with @comment
     else
       render json: { message: "its not your comment" }.to_json
     end

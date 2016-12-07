@@ -27,7 +27,7 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     @post = Post.find(params[:id])
     authorize @post
     if @post.destroy
-      render json: { message: "post successfully deleted" }.to_json
+      respond_with @post
     else
       render json: { message: "its not your post" }.to_json
     end

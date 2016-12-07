@@ -8,6 +8,7 @@ gem "rename", "~> 1.0", ">= 1.0.2"
 gem "sprockets", "3.6.3"
 gem "ruby-beautify", "~> 0.97.3"
 gem "html_truncator", "~>0.2"
+gem "simplecov", "~> 0.12.0", require: false
 
 # assets
 gem "autoprefixer-rails"
