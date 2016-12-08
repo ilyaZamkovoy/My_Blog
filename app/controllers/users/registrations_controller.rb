@@ -7,13 +7,14 @@ module Users
     end
 
     def account_update_params
-      params = devise_parameter_sanitizer.sanitize(:account_update)
+      params = devise_parameter_sanitizer.permit(:account_update, keys: [:password, :password_confirmation])
 
       if passwords_blank?(params)
         params.except(:password, :password_confirmation)
       else
         params
       end
+
     end
 
     def passwords_blank?(params)
