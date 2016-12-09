@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    current_user.comments.create(comment_params)
+    comment = current_user.comments.create(comment_params)
     if comment.save
       redirect_to post
     else
@@ -28,7 +28,9 @@ class CommentsController < ApplicationController
 
   def destroy
     comment.destroy
-    redirect_to comment.post
+    respond_to do |format|
+        format.html { redirect_to comment.post, alert: "comment successfully deleted" }
+      end
   end
 
   private

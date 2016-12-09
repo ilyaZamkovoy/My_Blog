@@ -1,6 +1,5 @@
 require "rails_helper"
 
-# need to fix button problems
 feature "Destroy Post", js: true do
   include_context "current user signed in"
     scenario "user destroys post" do

@@ -10,7 +10,6 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    byebug
     authorize @comment
     if @comment.update(comment_params)
       respond_with @comment

@@ -15,10 +15,11 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     render json: { message: message }.to_json, status: status
   end
 
+  # do i need this method
   def destroy
+    set_current_user!
     resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(@current_user)
-
     render json: { message: "Successfully deleted the account." }.to_json
   end
 
@@ -26,5 +27,12 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
 
   def sign_up_params
     params.require(:user).permit(:email, :password, :full_name)
+  end
+
+  def set_current_user!
+    @current_user = User.find_by auth_token: request.headers["X-Token"]
+    unless @current_user
+      render json: { error: "User not found" }.to_json and return
+    end
   end
 end

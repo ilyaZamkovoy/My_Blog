@@ -1,6 +1,7 @@
 class Api::V1::PostsController < Api::V1::ApplicationController
   def show
     @post = Post.find(params[:id])
+    respond_with @post
   end
 
   def create
@@ -17,7 +18,9 @@ class Api::V1::PostsController < Api::V1::ApplicationController
     @post = Post.find(params[:id])
     authorize @post
     if @post.update_attributes(post_params)
-      respond_with @post
+
+      render json: { message: "post susccesfully updated" }.to_json # why response is empty?
+      # respond_with @post
     else
       render json: { message: "its not your post" }.to_json
     end

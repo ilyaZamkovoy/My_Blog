@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user do
     email
     full_name { Faker::Name.name }
-    auth_token "2dc09cc4fcfc20bf68432e333fc47500"
+    auth_token "585404c6d9f6c4680a6108e719b57c00"
     password "123456"
     password_confirmation { password }
     confirmed_at 1.hour.ago
