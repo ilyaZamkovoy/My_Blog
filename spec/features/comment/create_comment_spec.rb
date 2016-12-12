@@ -5,7 +5,7 @@ feature "Create Comment" do
   scenario "user creates new comment" do
     post = create(:post, user: current_user)
 
-    visit "/posts/#{post.id}"
+    visit posting_path(post)
 
     fill_in "Text", with: "this is new comment"
 

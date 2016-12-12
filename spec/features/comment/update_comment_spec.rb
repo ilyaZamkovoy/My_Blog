@@ -6,7 +6,7 @@ feature "Update Comment", js: true do
     post = create(:post)
     comment = create(:comment, post: post, user: current_user)
 
-    visit "/posts/#{post.id}"
+    visit posting_path(post)
 
     click_on("Edit")
 

@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'support/factory_girl'
+require 'capybara/rspec'
 SimpleCov.start do
   add_filter '/spec/'
   add_filter '/config/'
