@@ -1,7 +1,7 @@
 require "rails_helper"
 
-describe "Comment API" do
-  it "comment create" do
+describe Api::V1::CommentsController do
+  it "should create comment" do
     user  = create(:user)
     post = create(:post)
 
@@ -18,7 +18,7 @@ describe "Comment API" do
       "X-Token" => user.auth_token
     }
 
-    post "/api/v1/comments", comment_params, request_headers
+    post api_v1_comments_path , comment_params, request_headers
 
     json = JSON.parse(response.body)
 
@@ -28,7 +28,7 @@ describe "Comment API" do
     expect(json["text"]).to eq("New Text")
   end
 
-  it "comment update" do
+  it "should update comment" do
     user = create(:user)
     comment = create(:comment, user: user)
 
@@ -44,21 +44,21 @@ describe "Comment API" do
       "X-Token" => user.auth_token
     }
 
-    put "/api/v1/comments/#{comment.id}", comment_params, request_headers
+    put  api_v1_comment_path(comment), comment_params, request_headers
 
     json = JSON.parse(response.body)
 
     # test for the 200 status-code
     expect(response).to be_success
     # check to make sure the right amount of messages are returned
-    expect(json["text"]).to eq("New Api Text")
+    expect(json["message"]).to eq("comment susccesfully updated")
   end
 
-  it "comment destroy" do
+  it "should destroy comment" do
     user = create(:user)
     comment = create(:comment, user: user)
 
-    comment_params = {}.to_json
+    comment_params = {}
 
     request_headers = {
       "Accept" => "application/json",
@@ -66,14 +66,14 @@ describe "Comment API" do
       "X-Token" => user.auth_token
     }
 
-    delete "/api/v1/comments/#{comment.id}", comment_params, request_headers
+    delete api_v1_comment_path(comment), comment_params, request_headers
 
     json = JSON.parse(response.body)
 
     # test for the 200 status-code
     expect(response).to be_success
     # check to make sure the right amount of messages are returned
-    expect(json["text"]).to eq("New Api Text")
+    expect(json["message"]).to eq("comment susccesfully deleted")
   end
 
 end

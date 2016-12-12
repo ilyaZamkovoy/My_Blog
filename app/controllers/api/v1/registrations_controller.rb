@@ -1,5 +1,6 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
   skip_before_action :verify_authenticity_token, only: %i(create)
+  respond_to :json
 
   def create
     build_resource(sign_up_params)
@@ -18,9 +19,11 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   # do i need this method
   def destroy
     set_current_user!
-    resource.destroy
-    Devise.sign_out_all_scopes ? sign_out : sign_out(@current_user)
-    render json: { message: "Successfully deleted the account." }.to_json
+    if @current_user.destroy
+      render json: { message: "Successfully deleted the account." }.to_json
+    else
+      render status: 400
+    end
   end
 
   private

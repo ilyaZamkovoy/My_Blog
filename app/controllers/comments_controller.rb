@@ -29,8 +29,8 @@ class CommentsController < ApplicationController
   def destroy
     comment.destroy
     respond_to do |format|
-        format.html { redirect_to comment.post, alert: "comment successfully deleted" }
-      end
+      format.html { redirect_to comment.post, alert: "comment successfully deleted" }
+    end
   end
 
   private

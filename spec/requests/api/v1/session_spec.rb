@@ -14,7 +14,7 @@ describe "Session API" do
       "Content-Type" => "application/json",
     }
 
-    post "/api/v1/login", user_params, request_headers
+    post api_v1_login_path, user_params, request_headers
 
     json = JSON.parse(response.body)
 

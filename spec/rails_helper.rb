@@ -12,4 +12,6 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.include FactoryGirl::Syntax::Methods
+
+   config.include Capybara::DSL
 end

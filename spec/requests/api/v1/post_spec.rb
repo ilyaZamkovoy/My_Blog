@@ -3,6 +3,7 @@ require "rails_helper"
 describe "Post API" do
   it "should create new post" do
     user = create(:user)
+    post1 = build(:post)
 
     post_params = {
       "post" => {
@@ -17,7 +18,7 @@ describe "Post API" do
       "X-Token" => user.auth_token
     }
 
-    post "/api/v1/posts", post_params, request_headers
+    post api_v1_posts_path, post_params, request_headers
 
     json = JSON.parse(response.body)
 
@@ -45,7 +46,7 @@ describe "Post API" do
       "X-Token" => user.auth_token
     }
 
-    put "/api/v1/posts/#{post.id}", post_params, request_headers
+    put api_v1_post_path(post), post_params, request_headers
 
     json = JSON.parse(response.body)
 
@@ -57,7 +58,7 @@ describe "Post API" do
     user = create(:user)
     post = create(:post, user: user)
 
-    post_params = {}.to_json
+    post_params = {}
 
     request_headers = {
       "Accept" => "application/json",
@@ -66,12 +67,12 @@ describe "Post API" do
     }
 
 
-    delete "/api/v1/posts/#{post.id}", post_params, request_headers
+    delete api_v1_post_path(post), post_params, request_headers
 
     json = JSON.parse(response.body)
 
     # check to make sure the right amount of messages are returned
-    expect(json["title"]).to eq("My New Title")
+    expect(json["message"]).to eq("post susccesfully deleted")
   end
 
   it "should show post" do

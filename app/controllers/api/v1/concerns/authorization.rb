@@ -9,6 +9,6 @@ module Api::V1::Concerns::Authorization
   private
 
   def user_not_authorized
-    render json: { message: "your are not authorized" }.to_json, status: 401
+    render status: 401
   end
 end

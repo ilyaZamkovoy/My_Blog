@@ -9,7 +9,7 @@ class Api::V1::ApplicationController < ActionController::Base
   def set_current_user!
     @current_user = User.find_by auth_token: request.headers["X-Token"]
     unless @current_user
-      render json: { error: "User not found" }.to_json and return
+      render status: 404
     end
   end
 end

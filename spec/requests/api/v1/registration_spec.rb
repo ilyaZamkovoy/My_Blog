@@ -16,7 +16,7 @@ describe "Comment API" do
       "Content-Type" => "application/json"
     }
 
-    post "/api/v1/register", user_params, request_headers
+    post api_v1_register_path, user_params, request_headers
 
     json = JSON.parse(response.body)
 
@@ -33,7 +33,7 @@ describe "Comment API" do
   it "should destroy user account" do
     user = create(:user)
 
-    user_params = {}.to_json
+    user_params = {}
 
     request_headers = {
       "Accept" => "application/json",
@@ -41,7 +41,7 @@ describe "Comment API" do
       "X-Token" => user.auth_token
     }
 
-    delete "/api/v1/delete_account", user_params, request_headers
+    delete api_v1_delete_account_path, user_params, request_headers
 
     json = JSON.parse(response.body)
 
