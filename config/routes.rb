@@ -29,8 +29,13 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :posts, only: :show
-      resources :users, only: %i(show create update destroy)
+      resources :posts
+      resources :comments
+      post "login", to: "sessions#create", as: :login
+      devise_scope :user do
+        post "register", to: "registrations#create", as: :register
+        delete "delete_account", to: "registrations#destroy", as: :delete_account
+      end
     end
   end
 end

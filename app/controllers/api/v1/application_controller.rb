@@ -1,9 +1,16 @@
-class ApplicationController < ActionController::API
-  before_action :check_token
+class Api::V1::ApplicationController < ActionController::Base
+  include Pundit
+  include Api::V1::Concerns::Authorization
 
-  def check_token
-    authenticate_or_request_with_http_token do |token, _options|
-      @current_user = User.find_by(auth_token: token)
+  respond_to :json
+
+  before_action :set_current_user!
+
+  # do i need this?
+  def set_current_user!
+    @current_user = User.find_by auth_token: request.headers["X-Token"]
+    unless @current_user
+      render json: { error: "User not found" }.to_json and return
     end
   end
 end

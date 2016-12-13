@@ -1,4 +1,4 @@
-module Authorization
+module Api::V1::Concerns::Authorization
   extend ActiveSupport::Concern
 
   included do
@@ -9,6 +9,6 @@ module Authorization
   private
 
   def user_not_authorized
-     redirect_to(root_path)
+    render json: { message: "its not your comment" }.to_json
   end
 end

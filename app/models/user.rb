@@ -10,12 +10,11 @@ class User < ActiveRecord::Base
 
   validates :full_name, presence: true
 
-  after_create :add_token
+  before_create :add_token
 
   private
 
   def add_token
-    return if token.present?
-    self.token = SecureRandom.hex
+    self.auth_token = SecureRandom.hex
   end
 end
