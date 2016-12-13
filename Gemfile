@@ -9,6 +9,7 @@ gem "sprockets", "3.6.3"
 gem "html_truncator", "~>0.2"
 gem "simplecov", "~> 0.12.0", require: false
 gem "ruby-beautify", "~> 0.97.4"
+gem "active_model_serializers", "~> 0.10.0"
 
 # assets
 gem "autoprefixer-rails"

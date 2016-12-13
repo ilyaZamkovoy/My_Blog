@@ -1,12 +1,17 @@
 class Api::V1::PostsController < Api::V1::ApplicationController
+  expose_decorated :post
+
   def show
-    post = Post.find(params[:id])
     respond_with post
   end
 
   def create
-    post = @current_user.posts.create(post_params)
-    respond_with post
+    post = @current_user.posts.new(post_params)
+    if post.save
+      respond_with post
+    else
+      render status: 422
+    end
   end
 
   def index
@@ -15,7 +20,6 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def update
-    post = Post.find(params[:id])
     authorize post
     if post.update_attributes(post_params)
       render json: { message: "post susccesfully updated" }.to_json # why response is empty?
@@ -26,7 +30,6 @@ class Api::V1::PostsController < Api::V1::ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id])
     authorize post
     if post.destroy
       render json: { message: "post susccesfully deleted" }.to_json

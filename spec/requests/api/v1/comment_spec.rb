@@ -47,11 +47,11 @@ describe Api::V1::CommentsController do
     put  api_v1_comment_path(comment), comment_params, request_headers
 
     json = JSON.parse(response.body)
-
+    byebug
     # test for the 200 status-code
     expect(response).to be_success
     # check to make sure the right amount of messages are returned
-    expect(json["message"]).to eq("comment susccesfully updated")
+    expect(json["text"]).to eq("New Api Text")
   end
 
   it "should destroy comment" do
