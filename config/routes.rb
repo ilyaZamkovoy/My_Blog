@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
 
   resources :users do
-    resources :posts, only: %i(index show), shallow: true, controller: "user_posts"
+    resources :posts, only: %i(index show), shallow: true, controller: "user_posts", as: "posting"
   end
 
   resources :users do
@@ -29,8 +29,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :posts
-      resources :comments
+      resources :posts, only: %i(show create update index destroy)
+      resources :comments, only: %i(create update destroy)
       post "login", to: "sessions#create", as: :login
       devise_scope :user do
         post "register", to: "registrations#create", as: :register

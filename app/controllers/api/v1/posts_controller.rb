@@ -1,35 +1,39 @@
 class Api::V1::PostsController < Api::V1::ApplicationController
+  expose_decorated :post
+
   def show
-    @post = Post.find(params[:id])
+    render json: post
   end
 
   def create
-    @post = @current_user.posts.create(post_params)
-    respond_with @post
+    post = @current_user.posts.new(post_params)
+    if post.save
+      render json: post
+    else
+      render status: 422
+    end
   end
 
   def index
-    @posts = @current_user.posts
-    respond_with @posts
+    posts = @current_user.posts
+    render json: posts
   end
 
   def update
-    @post = Post.find(params[:id])
-    authorize @post
-    if @post.update_attributes(post_params)
-      respond_with @post
+    authorize post
+    if post.update_attributes(post_params)
+      render json: @post
     else
-      render json: { message: "its not your post" }.to_json
+      render status: 401
     end
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    authorize @post
-    if @post.destroy
-      render json: { message: "post successfully deleted" }.to_json
+    authorize post
+    if post.destroy
+      render json: post
     else
-      render json: { message: "its not your post" }.to_json
+      render status: 401
     end
   end
 

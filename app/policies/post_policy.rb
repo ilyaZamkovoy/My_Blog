@@ -1,15 +1,15 @@
 class PostPolicy < ApplicationPolicy
   def update?
-    user_is_owner_of_record?
+    owner?
   end
 
   def destroy?
-    user_is_owner_of_record?
+    owner?
   end
 
   private
 
-  def user_is_owner_of_record?
+  def owner?
     @user == @record.user
   end
 end

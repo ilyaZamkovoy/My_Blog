@@ -1,31 +1,31 @@
 class Api::V1::CommentsController < Api::V1::ApplicationController
-  after_action :verify_authorized
+  expose :comment
+
   def create
-    @comment = @current_user.comments.create(comment_params)
-    if @comment.save
-      respond_with @comment
+    comment = @current_user.comments.new(comment_params)
+    if comment.save
+      render json: comment
     else
-      render json: { error: "comment cant be empty" }.to_json
+      render status: 422
     end
   end
 
   def update
-    @comment = Comment.find(params[:id])
-    authorize @comment
-    if @comment.update(comment_params)
-      respond_with @comment
+    authorize comment
+    if comment.update(comment_params)
+      @comment = comment
+      render json: @comment
     else
-      render json: { message: "its not your comment" }.to_json
+      render status: 422
     end
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    authorize @comment
-    if @comment.destroy
-      render json: { message: "comment successfully deleted" }.to_json
+    authorize comment
+    if comment.destroy
+      render json: comment
     else
-      render json: { message: "its not your comment" }.to_json
+      render status: 422
     end
   end
 
