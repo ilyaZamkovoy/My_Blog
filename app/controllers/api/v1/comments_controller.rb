@@ -1,10 +1,10 @@
 class Api::V1::CommentsController < Api::V1::ApplicationController
-  expose_decorated :comment
+  expose :comment
 
   def create
     comment = @current_user.comments.new(comment_params)
     if comment.save
-      respond_with comment
+      render json: comment
     else
       render status: 422
     end
@@ -13,17 +13,17 @@ class Api::V1::CommentsController < Api::V1::ApplicationController
   def update
     authorize comment
     if comment.update(comment_params)
-      respond_with comment
+      @comment = comment
+      render json: @comment
     else
-      respond_with status: 422
+      render status: 422
     end
   end
 
   def destroy
     authorize comment
     if comment.destroy
-      render json: { message: "comment susccesfully deleted" }.to_json
-      # respond_with comment
+      render json: comment
     else
       render status: 422
     end

@@ -1,6 +1,12 @@
 require "rails_helper"
 
 describe Api::V1::CommentsController do
+
+  let!(:user) { create(:user) }
+  let!(:post) { create(:post) }
+
+  let!(:comment) { create(:comment, user: user, post: post) }
+
   it "should create comment" do
     user  = create(:user)
     post = create(:post)
@@ -18,10 +24,9 @@ describe Api::V1::CommentsController do
       "X-Token" => user.auth_token
     }
 
-    post api_v1_comments_path , comment_params, request_headers
-
+    post api_v1_comments_path, comment_params, request_headers
+    byebug
     json = JSON.parse(response.body)
-
     # test for the 200 status-code
     expect(response).to be_success
     # check to make sure the right amount of messages are returned
@@ -29,8 +34,6 @@ describe Api::V1::CommentsController do
   end
 
   it "should update comment" do
-    user = create(:user)
-    comment = create(:comment, user: user)
 
     comment_params = {
       "comment" => {
@@ -44,10 +47,9 @@ describe Api::V1::CommentsController do
       "X-Token" => user.auth_token
     }
 
-    put  api_v1_comment_path(comment), comment_params, request_headers
-
-    json = JSON.parse(response.body)
+    put api_v1_comment_path(comment), comment_params, request_headers
     byebug
+    json = JSON.parse(response.body)
     # test for the 200 status-code
     expect(response).to be_success
     # check to make sure the right amount of messages are returned
