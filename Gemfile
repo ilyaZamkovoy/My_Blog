@@ -29,6 +29,7 @@ gem "inky-rb", require: "inky"
 gem "metamagic"
 gem "simple_form"
 gem "slim"
+gem "dotenv-rails"
 
 # all other gems
 gem "decent_decoration"
@@ -54,6 +55,7 @@ gem "stackprof"
 group :staging, :production do
   gem "newrelic_rpm"
   gem "rails_stdout_logging"
+
 end
 
 group :test do
@@ -75,7 +77,6 @@ group :development, :test do
   gem "bundler-audit", require: false
   gem "byebug"
   gem "coffeelint"
-  gem "dotenv-rails"
   gem "factory_girl_rails"
   gem "faker"
   gem "jasmine", "> 2.0"
