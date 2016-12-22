@@ -10,6 +10,7 @@ gem "html_truncator", "~>0.2"
 gem "simplecov", "~> 0.12.0", require: false
 gem "ruby-beautify", "~> 0.97.4"
 gem "active_model_serializers", "~> 0.10.0"
+gem "draper", "~> 2.1"
 
 # assets
 gem "autoprefixer-rails"
@@ -35,7 +36,7 @@ gem "dotenv-rails"
 gem "decent_decoration"
 gem "decent_exposure"
 gem "devise"
-gem "draper", "~> 2.1"
+
 gem "flamegraph"
 gem "google-analytics-rails"
 gem "health_check"
